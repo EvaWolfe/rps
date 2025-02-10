@@ -23,6 +23,7 @@ function game() {
     //alert so player can input their choice
     playerChoice = window.prompt('Choose your weapon: R, P, or S!');
     //failsafe for invalid choices 
+    playerChoice = playerChoice.toLowerCase();
     if (!choices.includes(playerChoice)) {
       window.prompt('You can only choose from R, P, or S...try again...');
     };
@@ -68,6 +69,18 @@ function game() {
       tracking.losses++;
     }
   };
+  //stores user input
+  function tally() {
+
+    if (playerChoice === 'r') {
+      tracking.rock++
+    } else if (playerChoice === 'p') {
+      tracking.paper++
+    } else {
+      tracking.scissors++
+    };
+  };
+  tally();
   determineWinner();
 
   //play again?
@@ -75,9 +88,23 @@ function game() {
     if (window.confirm(`Would you like to play again?`)) {
       game();
     } else {
-      window.alert('Thanks for playing!');
+      window.alert(`Thanks for playing!`);
+      window.alert(
+
+
+        `        Scoreboard:
+        Wins: ${tracking.wins} 
+        Losses: ${tracking.losses}
+        Ties: ${tracking.ties}
+        
+        You chose:
+        Rock: ${tracking.rock}
+        Paper: ${tracking.paper}
+        Scissor: ${tracking.scissors}`
+      );
     }
   };
+
   playagain();
 };
 game();
